@@ -24,25 +24,23 @@ namespace calculator_arpas
 
         private void btnEquals_Click(object sender, RoutedEventArgs e)
         {
-            // Get the expression from the text display
             string expression = txtDisplay.Text;
 
-            // Try to evaluate the expression
-            try
+            if (expression.Contains("/0")) txtInput.Text = "Division by zero was attempted";
+            else
             {
-                // Evaluate the expression using DataTable Compute method
-                var result = new DataTable().Compute(expression, null);
+                try
+                {
+                    var result = new DataTable().Compute(expression, null);
 
-                // Display the result
-                txtInput.Text = result.ToString();
+                }
+                catch (Exception)
+                {
+                    txtInput.Text = "Invalid";
+                }
             }
-            catch (Exception)
-            {
-                // If an exception occurs during evaluation, display "Invalid" in the text display
-                txtInput.Text = "Invalid";
-            }
+
         }
-
 
         private void regularButtonClick(object sender, RoutedEventArgs e)
         {
@@ -59,11 +57,9 @@ namespace calculator_arpas
 
         private void btnDot_Click(object sender, RoutedEventArgs e)
         {
-            // Check if the current text already contains a dot
             if (!txtDisplay.Text.Contains(".")) txtDisplay.Text += ".";
         }
 
-        // Event handler for operation buttons
         private void operationButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -72,17 +68,14 @@ namespace calculator_arpas
             {
                 string newOperation = button.Content.ToString();
 
-                // Check if the current display text ends with an operator
                 if (txtDisplay.Text.Length > 0 && IsOperator(txtDisplay.Text[^1]))
                 {
-                    // Replace the existing operator with the new one
                     txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1) + newOperation;
                 }
                 else txtDisplay.Text += newOperation;
             }
         }
 
-        // Method to check if a character is an operator
         private bool IsOperator(char c)
         {
             return c == '+' || c == '-' || c == '*' || c == '/';
@@ -109,21 +102,18 @@ namespace calculator_arpas
         {
             if (!string.IsNullOrEmpty(txtDisplay.Text))
             {
-                // Find the index of the last operator using LINQ
                 int lastOperatorIndex = txtDisplay.Text.Select((c, index) => new { Char = c, Index = index })
                                                         .Where(pair => IsOperator(pair.Char))
                                                         .Select(pair => pair.Index)
                                                         .DefaultIfEmpty(-1)
                                                         .Last();
 
-                // If an operator is found, remove everything after it
                 if (lastOperatorIndex >= 0)
                 {
                     txtDisplay.Text = txtDisplay.Text.Substring(0, lastOperatorIndex);
                 }
                 else
                 {
-                    // If no operator is found, simply clear the display
                     txtDisplay.Text = "0";
                 }
             }
