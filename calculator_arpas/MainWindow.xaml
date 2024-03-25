@@ -15,6 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -42,6 +43,9 @@
         <Button x:Name="btnSum" Content="+" Grid.Row="4" Grid.Column="4" FontSize="20" Margin="2" Click="operationButton_Click"/>
         <Button x:Name="btnSubtraction" Content="-" Grid.Row="5" Grid.Column="3" FontSize="20" Margin="2" Click="operationButton_Click"/>
         <Button x:Name="btnEquals" Content="=" Grid.Row="6" Grid.Column="2" FontSize="20" Margin="2" Grid.ColumnSpan="2" Click="btnEquals_Click" Background="#FF6740D6"/>
+        <Button x:Name="btnAdvanced" Content="advanced" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" FontSize="20" Margin="2" Click="btnAdvanced_Click"/>
+        <Button x:Name="btnRoot" Content="√(x)" Grid.Row="7" Grid.Column="0" FontSize="20" Margin="2" Click="btnRoot_Click" Visibility="Hidden"/>
+        <Button x:Name="btnFactoring" Content="x^2" Grid.Row="7" Grid.Column="1" FontSize="20" Margin="2" Click="btnFactoring_Click" Visibility="Hidden"/>
         <TextBox x:Name="txtDisplay" Grid.Row="0" Grid.ColumnSpan="4" Margin="2" TextAlignment="Right" Text="0" FontSize="15" IsReadOnly="True"/>
     </Grid>
 </Window>

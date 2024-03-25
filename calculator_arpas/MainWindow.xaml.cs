@@ -26,12 +26,13 @@ namespace calculator_arpas
         {
             string expression = txtDisplay.Text;
 
-            if (expression.Contains("/0")) txtInput.Text = "Division by zero was attempted";
+            if (expression.Contains("/0") && !expression.Contains("0.")) txtInput.Text = "Division by zero was attempted";
             else
             {
                 try
                 {
                     var result = new DataTable().Compute(expression, null);
+                    txtInput.Text = result.ToString();
 
                 }
                 catch (Exception)
@@ -119,5 +120,20 @@ namespace calculator_arpas
             }
         }
 
+        private void btnAdvanced_Click(object sender, RoutedEventArgs e)
+        {
+            btnRoot.Visibility = Visibility.Visible;
+            btnFactoring.Visibility = Visibility.Visible;
+        }
+
+        private void btnFactoring_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRoot_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
